@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<net name="detokenizer" version="11">
+	<layers>
+		<layer id="0" name="Parameter_293309" type="Parameter" version="opset1">
+			<data shape="?,?" element_type="i64" />
+			<output>
+				<port id="0" precision="I64" names="Parameter_293309">
+					<dim>-1</dim>
+					<dim>-1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="1" name="Convert_293320" type="Convert" version="opset1">
+			<data destination_type="i32" />
+			<input>
+				<port id="0" precision="I64">
+					<dim>-1</dim>
+					<dim>-1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="I32">
+					<dim>-1</dim>
+					<dim>-1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="2" name="Constant_293212" type="Const" version="opset1">
+			<data element_type="u8" shape="1976110" offset="0" size="1976110" />
+			<output>
+				<port id="0" precision="U8">
+					<dim>1976110</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="3" name="StringTensorUnpack_293213" type="StringTensorUnpack" version="extension">
+			<data mode="begins_ends" />
+			<input>
+				<port id="0" precision="U8">
+					<dim>1976110</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="I32">
+					<dim>-1</dim>
+				</port>
+				<port id="2" precision="I32">
+					<dim>-1</dim>
+				</port>
+				<port id="3" precision="U8">
+					<dim>-1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="4" name="VocabDecoder_293310" type="VocabDecoder" version="extension">
+			<data skip_tokens="151643, 151644, 151645" />
+			<input>
+				<port id="0" precision="I32">
+					<dim>-1</dim>
+					<dim>-1</dim>
+				</port>
+				<port id="1" precision="I32">
+					<dim>-1</dim>
+				</port>
+				<port id="2" precision="I32">
+					<dim>-1</dim>
+				</port>
+				<port id="3" precision="U8">
+					<dim>-1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="4" precision="I32">
+					<dim>-1</dim>
+				</port>
+				<port id="5" precision="I32">
+					<dim>-1</dim>
+				</port>
+				<port id="6" precision="I32">
+					<dim>-1</dim>
+				</port>
+				<port id="7" precision="I32">
+					<dim>-1</dim>
+				</port>
+				<port id="8" precision="U8">
+					<dim>-1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="5" name="CharsToBytes_293311" type="CharsToBytes" version="extension">
+			<input>
+				<port id="0" precision="I32">
+					<dim>-1</dim>
+				</port>
+				<port id="1" precision="I32">
+					<dim>-1</dim>
+				</port>
+				<port id="2" precision="I32">
+					<dim>-1</dim>
+				</port>
+				<port id="3" precision="I32">
+					<dim>-1</dim>
+				</port>
+				<port id="4" precision="U8">
+					<dim>-1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="5" precision="I32">
+					<dim>-1</dim>
+				</port>
+				<port id="6" precision="I32">
+					<dim>-1</dim>
+				</port>
+				<port id="7" precision="U8">
+					<dim>-1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="6" name="StringTensorPack_293312" type="StringTensorPack" version="extension">
+			<data mode="begins_ends" />
+			<input>
+				<port id="0" precision="I32">
+					<dim>-1</dim>
+				</port>
+				<port id="1" precision="I32">
+					<dim>-1</dim>
+				</port>
+				<port id="2" precision="U8">
+					<dim>-1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3" precision="STRING" names="string_output">
+					<dim>-1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="7" name="Result_293313" type="Result" version="opset1">
+			<input>
+				<port id="0" precision="STRING">
+					<dim>-1</dim>
+				</port>
+			</input>
+		</layer>
+	</layers>
+	<edges>
+		<edge from-layer="0" from-port="0" to-layer="1" to-port="0" />
+		<edge from-layer="1" from-port="1" to-layer="4" to-port="0" />
+		<edge from-layer="2" from-port="0" to-layer="3" to-port="0" />
+		<edge from-layer="3" from-port="1" to-layer="4" to-port="1" />
+		<edge from-layer="3" from-port="2" to-layer="4" to-port="2" />
+		<edge from-layer="3" from-port="3" to-layer="4" to-port="3" />
+		<edge from-layer="4" from-port="4" to-layer="5" to-port="0" />
+		<edge from-layer="4" from-port="5" to-layer="5" to-port="1" />
+		<edge from-layer="4" from-port="6" to-layer="5" to-port="2" />
+		<edge from-layer="4" from-port="7" to-layer="5" to-port="3" />
+		<edge from-layer="4" from-port="8" to-layer="5" to-port="4" />
+		<edge from-layer="5" from-port="5" to-layer="6" to-port="0" />
+		<edge from-layer="5" from-port="6" to-layer="6" to-port="1" />
+		<edge from-layer="5" from-port="7" to-layer="6" to-port="2" />
+		<edge from-layer="6" from-port="3" to-layer="7" to-port="0" />
+	</edges>
+	<rt_info>
+		<chat_template value="{% for message in messages %}{% if loop.first and messages[0]['role'] != 'system' %}{{ '&lt;|im_start|>system&#10;You are a helpful assistant.&lt;|im_end|>&#10;' }}{% endif %}{{'&lt;|im_start|>' + message['role'] + '&#10;' + message['content'] + '&lt;|im_end|>' + '&#10;'}}{% endfor %}{% if add_generation_prompt %}{{ '&lt;|im_start|>assistant&#10;' }}{% endif %}" />
+		<eos_token_id value="151645" />
+		<original_tokenizer_class value="&lt;class 'transformers.models.qwen2.tokenization_qwen2_fast.Qwen2TokenizerFast'>" />
+		<pad_token_id value="151643" />
+	</rt_info>
+</net>

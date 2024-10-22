@@ -1,0 +1,25 @@
+{
+  "_name_or_path": "Qwen/Qwen2-Audio-7B-Instruct",
+  "architectures": [
+    "Qwen2AudioForConditionalGeneration"
+  ],
+  "audio_config": {
+    "model_type": "qwen2_audio_encoder"
+  },
+  "audio_token_index": 151646,
+  "ignore_index": -100,
+  "model_type": "qwen2_audio",
+  "text_config": {
+    "bos_token_id": 151643,
+    "eos_token_id": 151645,
+    "intermediate_size": 11008,
+    "max_position_embeddings": 8192,
+    "model_type": "qwen2",
+    "rms_norm_eps": 1e-05,
+    "torch_dtype": "bfloat16",
+    "use_mrope": false,
+    "vocab_size": 156032
+  },
+  "transformers_version": "4.45.0.dev0",
+  "vocab_size": 156032
+}
